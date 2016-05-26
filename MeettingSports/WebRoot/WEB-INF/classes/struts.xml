@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+<constant name="struts.devMode" value="true" />
+
+<package name="login" namespace="/" extends="struts-default">
+	<!--登陆处理 -->
+	<action name="login_check" class="com.ms.action.loginAction" method="check">
+		<result name="success">/WEB-INF/login/main.jsp</result>
+		<result name="error">/index.jsp</result>
+		<result name="input">/index.jsp</result>
+	</action>
+		<!--登陆用户信息完善修改  -->
+	<action name="login_*" class="com.ms.action.loginAction" method="{1}">
+		<result name="input">/WEB-INF/login/{1}.jsp</result>
+		<result name="register">/WEB-INF/login/register.jsp</result>
+		<result name="registersuccess">/WEB-INF/login/registersuccess.jsp</result>
+		<result name="active">/WEB-INF/login/active.jsp</result>
+		<result name="error">WEB-INF/error-1.jsp</result>
+	</action>
+	<!--注册用户  -->
+	
+</package>
+
+<!-- 用户管理 -->
+<package name="users"  namespace="/" extends="struts-default">
+	<!--增删改查 用户信息管理 -->
+	<action name="UserInfo_*" class="com.ms.action.UserAction" method="{1}">
+		<result name="success">/WEB-INF/user/UserInfo_{1}.jsp</result>
+	</action>
+	<!--增删改查教练 用户信息管理 -->
+	<action name="sellerInfo_*" class="com.ms.action.SellerAction" method="{1}">
+		<result name="success">/WEB-INF/seller/SellerUser_common.jsp</result>
+	</action>
+</package>
+
+<!-- 订单管理 -->
+<package name="orders"  namespace="/" extends="struts-default">
+	<!-- 教练订单管理 -->
+	<action name="CoachOrders_*" class="com.ms.action.CoachAction" method="{1}">
+		<result name="success">/WEB-INF/coach/CoachOrders_{1}.jsp</result>
+	</action>
+	
+	
+	<!-- 卖家订单管理 -->
+	<action name="Seller*_*" class="com.ms.action.SellerAction" method="{2}">
+		<result name="success">/WEB-INF/seller/Coach{1}_{2}.jsp</result>
+	</action>
+	
+	<!-- 用户订单管理 -->
+	<action name="UserOrders_*" class="com.ms.action.OrdersAction" method="{1}">
+		<result name="success">/WEB-INF/user/orderInfo.jsp
+		</result>
+	</action>
+</package>
+
+<!-- App接口服务 -->
+<package name="Web"  namespace="/" extends="struts-default">
+	<!-- User管理 -->
+	<action name="WebUser_*" class="web.action.WebUserAction" method="{1}">
+		<result name="success">/WEB-INF/user/orderInfo.jsp</result>
+	</action>
+	
+	<!-- Order管理 -->
+	<action name="WebOrders_*" class="web.action.WebOrderAction" method="{1}">
+		<result name="success">/WEB-INF/user/orderInfo.jsp</result>
+	</action>
+	<!-- Banner -->
+	<action name="WebIndex_*" class="web.action.WebIndexAction" method="{1}">
+		<result name="success">/WEB-INF/user/orderInfo.jsp</result>
+	</action>
+</package>
+
+<constant name="struts.action.extension" value="action"></constant>
+
+</struts>
